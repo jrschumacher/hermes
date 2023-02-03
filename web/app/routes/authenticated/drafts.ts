@@ -14,10 +14,11 @@ import AuthenticatedUserService from "hermes/services/authenticated-user";
 import { task } from "ember-concurrency";
 import FetchService from "hermes/services/fetch";
 import { assert } from "@ember/debug";
+import { HermesDocument } from "hermes/types/document";
 
 interface DraftResponseJSON {
   facets: AlgoliaFacetsObject;
-  Hits: Array<unknown>; // Documents, not yet typed
+  Hits: HermesDocument[];
   params: string;
   page: number;
 }

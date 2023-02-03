@@ -6,14 +6,15 @@ import { assert } from "@ember/debug";
 import { task } from "ember-concurrency";
 import FetchService from "hermes/services/fetch";
 
-export interface AuthenticatedUser {
+interface AuthenticatedUserInfo {
   email: string;
   given_name: string;
+  name: string;
   picture: string;
   subscriptions: Subscription[];
 }
 
-export interface Subscription {
+interface Subscription {
   productArea: string;
   subscriptionType: SubscriptionType;
 }
@@ -29,9 +30,9 @@ export default class AuthenticatedUserService extends Service {
   @service declare session: any;
 
   @tracked subscriptions: Subscription[] | null = null;
-  @tracked private _info: AuthenticatedUser | null = null;
+  @tracked private _info: AuthenticatedUserInfo | null = null;
 
-  get info(): AuthenticatedUser {
+  get info(): AuthenticatedUserInfo {
     assert("Authenticated must exist", this._info);
     return this._info;
   }

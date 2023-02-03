@@ -1,9 +1,38 @@
 {{page-title "My Docs"}}
 
-<Header @facets={{@model.facets}} />
+<Header />
+
+<div class="x-container mb-6">
+  <div class="flex justify-between items-center mb-8">
+    <nav class="flex space-x-4 text-display-500 font-bold">
+      <a class="">All</a>
+      <a class="text-color-foreground-faint opacity-60">Published</a>
+      <a class="text-color-foreground-faint opacity-60">Drafts</a>
+    </nav>
+    <Hds::Form::Checkbox::Field checked as |F|>
+      <F.Label class="font-regular">
+        Include docs shared with me
+      </F.Label>
+    </Hds::Form::Checkbox::Field>
+  </div>
+  <div class="tile-list">
+    {{#each @model.results as |doc|}}
+      <Doc::Tile
+        @avatar="{{get doc.ownerPhotos 0}}"
+        @docID="{{doc.objectID}}"
+        @isResult="{true}"
+        @owner="{{get doc.owners 0}}"
+        @productArea="{{doc.product}}"
+        @snippet="{{doc._snippetResult.content.value}}"
+        @status="{{lowercase doc.status}}"
+        @title="{{doc.title}}"
+      />
+    {{/each}}
+  </div>
+</div>
 
 <RowResults
-  @docs={{@model.results.hits}}
-  @nbPages={{@model.results.nbPages}}
-  @currentPage={{(add @model.results.page 1)}}
+  @docs={{@model.results}}
+  @nbPages={{@model.nbPages}}
+  @currentPage={{(add @model.page 1)}}
 />

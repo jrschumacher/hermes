@@ -11,21 +11,13 @@
         @current-when="authenticated.all"
         @query={{this.defaultBrowseScreenQueryParams}}
       >
-        All Docs
+        Explore
       </LinkTo>
       <LinkTo
         @route="authenticated.my"
         @current-when="authenticated.my"
-        @query={{this.defaultBrowseScreenQueryParams}}
       >
         My Docs
-      </LinkTo>
-      <LinkTo
-        @route="authenticated.drafts"
-        @current-when="authenticated.drafts"
-        @query={{this.defaultBrowseScreenQueryParams}}
-      >
-        My Drafts
       </LinkTo>
     </div>
 

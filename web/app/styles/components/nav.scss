@@ -9,7 +9,7 @@
     @apply -ml-2.5 h-16 flex shrink-0 md:mx-6 order-3 md:order-2;
 
     a {
-      @apply px-2.5 md:px-3.5 h-full flex items-center text-color-foreground-faint;
+      @apply px-2.5 md:px-3.5 h-full text-body-300 flex items-center text-color-foreground-faint;
 
       &:hover {
         @apply text-color-foreground-strong;
