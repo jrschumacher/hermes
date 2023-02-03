@@ -1,0 +1,9 @@
+.product-area-link {
+  @apply text-color-foreground-faint leading-none;
+}
+
+.sidebar {
+  .product-area-link {
+    @apply text-color-foreground-primary;
+  }
+}

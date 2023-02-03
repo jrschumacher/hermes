@@ -16,12 +16,12 @@
   @title (string): title of document
 -->
 
-<LinkTo
-  @route="authenticated.document"
-  @model="{{@docID}}"
-  class="flex flex-col items-start space-y-2 no-underline p-4 -m-4 rounded-md hover:bg-[color:var(--token-color-palette-neutral-50)] active:bg-[color:var(--token-color-palette-neutral-100)] overflow-hidden"
->
-  <div class="flex flex-col items-start w-[108px] space-y-3">
+<div class="flex flex-col items-start space-y-2">
+  <LinkTo
+    @route="authenticated.document"
+    @model={{@docID}}
+    class="flex flex-col items-start w-[108px] space-y-3 no-underline"
+  >
     <div
       class="relative flex items-center w-[108px] h-[148px] hds-surface-mid
         {{if
@@ -63,27 +63,40 @@
       </div>
     </div>
     <Doc::State @state="{{@status}}" />
-  </div>
+  </LinkTo>
 
-  <div class="flex flex-col items-start space-y-1">
+  <LinkTo
+    @route="authenticated.document"
+    @model={{@docID}}
+    class="flex flex-col items-start space-y-1 no-underline"
+  >
     <h4 class="doc-tile-title">{{@title}}</h4>
     {{#if (not (is-empty @docNumber))}}
       <small
         class="hds-typography-body-100 hds-font-weight-medium hds-foreground-faint"
       >{{@docNumber}}</small>
     {{/if}}
-  </div>
+  </LinkTo>
 
-  <div class="flex flex-col items-start space-y-1 pb-1 max-w-full">
+  <LinkTo
+    @route="authenticated.document"
+    @model={{@docID}}
+    class="flex flex-col items-start space-y-1 pb-1 max-w-full no-underline"
+  >
     <Person @ignoreUnknown={{true}} @imgURL={{@avatar}} @email={{@owner}} />
     {{#if (not (is-empty @modifiedAgo))}}
       <p
         class="hds-typography-body-100 hds-foreground-faint"
       >{{@modifiedAgo}}</p>
     {{/if}}
-  </div>
-
-  <Hds::Badge @text={{this.productAreaName}} @icon={{this.productAreaIcon}} />
+  </LinkTo>
+  <LinkTo
+    @route="authenticated.all"
+    @query={{hash product=(array @productArea) page="1"}}
+    class="product-area-link"
+  >
+    {{this.productAreaName}}
+  </LinkTo>
 
   {{#if @isResult}}
     {{#if @snippet}}
@@ -92,4 +105,4 @@
       >{{{@snippet}}}</p>
     {{/if}}
   {{/if}}
-</LinkTo>
+</div>

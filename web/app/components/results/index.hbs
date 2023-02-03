@@ -1,31 +1,31 @@
 <section class="flex flex-col items-center flex-1 min-h-full">
   <div class="x-container">
+
+    <div class="flex w-full justify-between items-center">
+      <h1
+        class="hds-typography-display-300 shrink-0 hds-font-weight-semibold hds-foreground-strong"
+      >{{@results.nbHits}} documents matching “{{@query}}”</h1>
       {{#if (and this.firstPageIsShown this.queryIsProductName)}}
-        <div class="flex flex-col items-start w-full pb-10" data-test-results-product-link>
-          <Hds::Card::Container
-            @level="mid"
-            @hasBorder="true"
-            @overflow="hidden"
-            class="flex flex-col items-start space-y-3 pt-4 px-4 pb-3"
+        <div data-test-results-product-link class="flex space-x-2">
+          <LinkTo
+            @route="authenticated.all"
+            @query={{hash product=(array this.capitalizedQuery)}}
+            class="text-color-foreground-action no-underline flex items-center"
           >
-            <Hds::Badge
-              @text={{this.capitalizedQuery}}
-              @icon={{or (get-product-id @query) "folder"}}
+            View all
+            <FlightIcon
+              @name={{or (get-product-id @query) "folder"}}
+              class="mr-1 ml-2"
             />
-            <Hds::Link::Standalone
-              @text="View all {{this.capitalizedQuery}} documents"
-              @icon="arrow-right-circle"
-              @iconPosition="trailing"
-              @route="authenticated.all"
-              @query={{hash product=(array this.capitalizedQuery)}}
-            />
-          </Hds::Card::Container>
+            <span class="font-semibold mr-1.5">
+              {{this.capitalizedQuery}}
+            </span>
+            documents
+            <FlightIcon @name="arrow-right-circle" class="ml-1.5" />
+          </LinkTo>
         </div>
       {{/if}}
-
-    <h1
-      class="hds-typography-display-300 hds-font-weight-semibold hds-foreground-strong"
-    >{{@results.nbHits}} documents matching “{{@query}}”</h1>
+    </div>
     <div class="flex flex-col space-y-12 w-full py-10">
       <div class="tile-list">
         {{#each @results.hits as |doc index|}}
